@@ -4,9 +4,11 @@ class GithubRepo extends React.Component {
     render(){
         return(
             <div>
-                <a href={this.props.url}>
-                    {this.state.name}
-                </a>
+                <p>
+                <a href={this.props.url}> {this.props.name} </a>
+                &#11088;
+                {this.props.starred}
+                </p>
             </div>
         );
     }
