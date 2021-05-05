@@ -1,20 +1,12 @@
 import React from 'react';
 
 class GithubRepo extends React.Component {
-    constructor(props) {
-        super();
-        this.state = {
-            url: "",
-            starred: 0
-        };
-    }
-
     render(){
         return(
             <div>
-                <p>
-                    {this.state.url}
-                </p>
+                <a href={this.props.url}>
+                    {this.state.name}
+                </a>
             </div>
         );
     }

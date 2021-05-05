@@ -5,13 +5,6 @@ class Repos extends React.Component {
     constructor() {
         super();
         this.state = {};
-        this.displayProject = this.displayProject.bind(this)
-    }
-
-    displayProject(repo){
-        return(
-            <GithubRepo url={repo.repos_url} starred={repo.starred_url}/>
-        )
     }
 
     componentDidMount() {
@@ -19,6 +12,7 @@ class Repos extends React.Component {
         .then(response => response.json())
         .then(
             repos => {
+                console.log(repos);
                 this.setState({
                     repos: repos
                 });
@@ -26,14 +20,24 @@ class Repos extends React.Component {
         );
     }
 
-    render(){
+    displayProject(repo){
         return(
-            <div className="repos">
+            <GithubRepo name ={repo.name} url={repo.html_url} starred={repo.stargazers_count} key={repo.id}/>
+        )
+    }
+    
+    render(){
+        if(!this.state.repos){
+            return( <div>Loading Repos...</div>)
+          }
+          
+        return(
+            <div>
                 <h1>{this.props.params.username}'s Repos</h1>
-
                 <div>
-                    {this.state.repos.map(this.displayProject(this))}
+                    {this.state.repos.map(this.displayProject.bind(this))}
                 </div>
+                {this.props.children}
             </div>
         );
     }
