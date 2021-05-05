@@ -1,9 +1,17 @@
 import React from 'react';
+import GithubRepo from './GithubRepo';
 
 class Repos extends React.Component {
     constructor() {
         super();
         this.state = {};
+        this.displayProject = this.displayProject.bind(this)
+    }
+
+    displayProject(repo){
+        return(
+            <GithubRepo url={repo.repos_url} starred={repo.starred_url}/>
+        )
     }
 
     componentDidMount() {
@@ -18,11 +26,14 @@ class Repos extends React.Component {
         );
     }
 
-
     render(){
         return(
             <div className="repos">
-                <h1>hello</h1>
+                <h1>{this.props.params.username}'s Repos</h1>
+
+                <div>
+                    {this.state.repos.map(this.displayProject(this))}
+                </div>
             </div>
         );
     }
